@@ -11,14 +11,11 @@ const Register = () => {
     const handleRegisterWithEmailAndPass = (e) => {
         e.preventDefault();
         const form = e.target;
-
         const email = form.email.value;
         const password = form.password.value;
-        console.log('New User', email, password);
 
         createAccountWithEmailAndPass(email, password)
             .then(result => {
-
                 if (result.user) {
                     Swal.fire({
                         position: "top-end",
@@ -30,7 +27,7 @@ const Register = () => {
                     setUser(null);
                     navigate('/LogIn');
                 }
-            }).catch(error => console.log(error));
+            }).catch(error => error);
     }
 
 

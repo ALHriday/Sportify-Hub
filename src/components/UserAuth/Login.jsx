@@ -12,10 +12,8 @@ const Login = () => {
     const handleLogIn = (e) => {
         e.preventDefault();
         const form = e.target;
-
         const email = form.email.value;
         const password = form.password.value;
-        console.log('New User', email, password);
 
         signInAccountWithEmailAndPass(email, password)
             .then(result => {
@@ -30,7 +28,7 @@ const Login = () => {
                     setUser(result.user);
                     navigate('/');
                 }
-            }).catch(error => console.log(error))
+            }).catch(error => error)
     }
 
 
@@ -49,7 +47,7 @@ const Login = () => {
                     navigate('/');
                 }
 
-            }).catch(error => console.log(error))
+            }).catch(error => error)
     }
 
 
