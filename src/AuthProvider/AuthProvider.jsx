@@ -10,6 +10,11 @@ const AuthProvider = ({ children }) => {
         user,
         setUser
     }
+    if (!user) {
+        return <div className="flex justify-center items-center">
+            loading....
+        </div>
+    }
     return (
         <AuthContext.Provider value = {values}>
             {children}
