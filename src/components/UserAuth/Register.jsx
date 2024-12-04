@@ -1,0 +1,59 @@
+import { Link } from "react-router-dom";
+
+const Register = () => {
+
+    const handleRegisterWithEmailAndPass = (e) => {
+        e.preventDefault();
+        const form = e.target;
+
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email, password);
+        
+
+    }
+
+
+    return (
+
+        <div className="hero bg-base-200 min-h-screen">
+            <div className="hero-content flex-col lg:flex-row-reverse">
+                <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                    <form onSubmit={handleRegisterWithEmailAndPass} className="card-body">
+                        <h1 className="text-4xl font-bold">Register now!</h1>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input type="text" name="name" placeholder="Enter Name" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Email</span>
+                            </label>
+                            <input type="email" name="email" placeholder="email" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                            <label className="label">
+                                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                            </label>
+                        </div>
+                        <div className="form-control my-2">
+                            <button className="btn btn-primary">Register</button>
+                        </div>
+                    </form>
+
+                    <div className="mb-1 text-center">
+                        <p>Already have an account.<Link to='/LogIn' className="text-blue-500 underline pl-1">LogIn</Link></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default Register;

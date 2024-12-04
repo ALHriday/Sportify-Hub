@@ -10,19 +10,29 @@ import {
 import AuthProvider from './AuthProvider/AuthProvider.jsx';
 import Home from './components/Home.jsx';
 import Equipments from './components/Equipments.jsx';
+import Register from './components/UserAuth/Register.jsx';
+import Login from './components/UserAuth/Login.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App></App>,
+    element: <App/>,
     children: [
       {
         path: '/',
-        element: <Home></Home>
+        element: <Home/>
       },
       {
         path: '/Equipments',
-        element: <Equipments></Equipments>
+        element: <Equipments/>
+      },
+      {
+        path: '/Register',
+        element: <Register/>
+      },
+      {
+        path: '/LogIn',
+        element: <Login/>
       }
     ]
   },

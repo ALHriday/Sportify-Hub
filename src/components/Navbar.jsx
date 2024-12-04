@@ -1,6 +1,20 @@
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./UserAuth/firebase.init";
 
 const Navbar = () => {
+
+    const { user, handleLogOut, setUser } = useContext(AuthContext);
+
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser)
+        });
+        return () => unSubscribe();
+    }, [setUser]);
+
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -37,8 +51,8 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
-                    <Link to='/'><li><a>Home</a></li> </Link>
-                    <Link to='/Equipments'><li><a>Equipments</a></li></Link>
+                    <Link to='/'>Home</Link>
+                    <Link to='/Equipments'>Equipments</Link>
                     <li>
                         <details>
                             <summary>Parent</summary>
@@ -48,15 +62,23 @@ const Navbar = () => {
                             </ul>
                         </details>
                     </li>
-                    <Link to='/About'><li><a>About</a></li></Link>
+                    <Link to='/About'>About</Link>
                 </ul>
             </div>
             <div className="navbar-end gap-3">
-                <Link to='/Register'>Register</Link>
-                <Link to='/LogIn'>LogIn</Link>
-                <div className="w-8 h-8 p-1 rounded-full bg-slate-100">
-                    <img src="" alt="" />
-                </div>
+
+                {user ? <div className="flex justify-center items-center gap-3">
+                    <div className="w-8 h-8 p-1 cursor-pointer rounded-full bg-slate-100">
+                        <img className="rounded-full" src={user.photoURL} title={user.displayName} alt="" />
+                    </div>
+                    <Link className="btn btn-sm" onClick={handleLogOut} to='/LogIn'>LogOut</Link>
+                </div> :
+                    <div className="flex justify-center items-center gap-3">
+                        <Link className="btn btn-sm" to='/Register'>Register</Link>
+                        <Link className="btn btn-sm" to='/LogIn'>LogIn</Link>
+                    </div>
+                }
+
             </div>
         </div>
     );
