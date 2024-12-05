@@ -5,7 +5,7 @@ import Swal from 'sweetalert2'
 
 const Login = () => {
 
-    const { createGoogleAccount, setUser, signInAccountWithEmailAndPass } = useContext(AuthContext);
+    const { createGoogleAccount, setUser, signInAccountWithEmailAndPass, passValidation, setPassValidation } = useContext(AuthContext);
 
     const navigate = useNavigate();
 
@@ -18,6 +18,7 @@ const Login = () => {
         signInAccountWithEmailAndPass(email, password)
             .then(result => {
                 if (result.user) {
+                    setPassValidation('');
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -28,7 +29,7 @@ const Login = () => {
                     setUser(result.user);
                     navigate('/');
                 }
-            }).catch(error => error)
+            }).catch(() => setPassValidation('Invalid Email or Password.'))
     }
 
 
@@ -76,6 +77,7 @@ const Login = () => {
                         <div className="form-control mt-3">
                             <button className="btn btn-primary">LogIn</button>
                         </div>
+                        <div className="text-center text-red-500">{ passValidation}</div>
                     </form>
 
                     <div className="text-center">

@@ -5,7 +5,8 @@ import Swal from 'sweetalert2'
 
 const Register = () => {
 
-    const { createAccountWithEmailAndPass, setUser } = useContext(AuthContext);
+    const { createAccountWithEmailAndPass, setUser, passValidation,
+        setPassValidation } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleRegisterWithEmailAndPass = (e) => {
@@ -14,7 +15,11 @@ const Register = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        createAccountWithEmailAndPass(email, password)
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}$/;
+
+        if (regex.test(password)) {
+            setPassValidation(" ");
+            createAccountWithEmailAndPass(email, password)
             .then(result => {
                 if (result.user) {
                     Swal.fire({
@@ -28,6 +33,9 @@ const Register = () => {
                     navigate('/LogIn');
                 }
             }).catch(error => error);
+        } else {
+            setPassValidation("Password must be contain 1 UpperCase, 1 LowerCase, 1 special character and at least 6 characters.");
+        }
     }
 
 
@@ -62,6 +70,7 @@ const Register = () => {
                         <div className="form-control my-2">
                             <button className="btn btn-primary">Register</button>
                         </div>
+                        <div className="text-center text-red-500">{ passValidation}</div>
                     </form>
 
                     <div className="mb-1 text-center">
