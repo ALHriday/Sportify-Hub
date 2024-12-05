@@ -10,8 +10,10 @@ const Navbar = () => {
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser)
+            setUser(currentUser);
+            // setLoading(false);
         });
+
         return () => unSubscribe();
     }, [setUser]);
 
@@ -37,32 +39,18 @@ const Navbar = () => {
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         <Link to='/'>Home</Link>
-                        <li>
-                            <a>Parent</a>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </li>
-                        <li><a>Item 3</a></li>
+                        <Link to='/Equipments'>Equipments</Link>
+                        {user ? <Link to='/About'>About</Link> : ''}
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl">Sportify Hub</a>
             </div>
             <div className="navbar-center hidden lg:flex">
-                <ul className="menu menu-horizontal px-1">
+                <ul className="menu menu-horizontal px-1 gap-3">
                     <Link to='/'>Home</Link>
                     <Link to='/Equipments'>Equipments</Link>
-                    <li>
-                        <details>
-                            <summary>Parent</summary>
-                            <ul className="p-2">
-                                <li><a>Submenu 1</a></li>
-                                <li><a>Submenu 2</a></li>
-                            </ul>
-                        </details>
-                    </li>
-                    <Link to='/About'>About</Link>
+                    {user ? <Link to='/About'>About</Link> : ''}
+
                 </ul>
             </div>
             <div className="navbar-end gap-3">

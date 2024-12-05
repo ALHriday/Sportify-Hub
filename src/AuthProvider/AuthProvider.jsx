@@ -11,11 +11,11 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [passValidation, setPassValidation] = useState([]);
 
-    if (!user) {
-        <div className="flex justify-center items-center">
-            loading....
-        </div>
-    }
+    // if (loading) {
+    //     <div className="flex justify-center items-center">
+    //         loading....
+    //     </div>
+    // }
 
     const createGoogleAccount = () => {
         setLoading(true);
@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
     }
 
     const handleLogOut = () => {
-        setLoading(false);
+        setLoading(true);
         return signOut(auth);
     }
 
