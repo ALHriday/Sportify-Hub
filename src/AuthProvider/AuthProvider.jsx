@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
     const [user, setUser] = useState([]);
     const [loading, setLoading] = useState(true);
     const [passValidation, setPassValidation] = useState([]);
+    const [isTrue, setIsTrue] = useState(true);
 
     // if (loading) {
     //     <div className="flex justify-center items-center">
@@ -36,6 +37,17 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
 
+    const showPass = (input) => {
+
+        if (input.current.type === 'password') {
+            setIsTrue(false);
+            input.current.type = 'text';
+        } else {
+            setIsTrue(true);
+            input.current.type = 'password';
+        }
+    }
+
     const values = {
         user,
         setUser,
@@ -45,7 +57,10 @@ const AuthProvider = ({ children }) => {
         signInAccountWithEmailAndPass,
         loading,
         passValidation,
-        setPassValidation
+        setPassValidation,
+        showPass,
+        isTrue,
+        setIsTrue,
     }
 
     return (

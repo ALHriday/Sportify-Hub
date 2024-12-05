@@ -1,13 +1,16 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from 'sweetalert2'
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa6";
 
 const Register = () => {
 
     const { createAccountWithEmailAndPass, setUser, passValidation,
-        setPassValidation } = useContext(AuthContext);
+        setPassValidation, showPass, isTrue } = useContext(AuthContext);
     const navigate = useNavigate();
+    const passRef = useRef();
 
     const handleRegisterWithEmailAndPass = (e) => {
         e.preventDefault();
@@ -20,19 +23,19 @@ const Register = () => {
         if (regex.test(password)) {
             setPassValidation(" ");
             createAccountWithEmailAndPass(email, password)
-            .then(result => {
-                if (result.user) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: "Account Registration Successfull.",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    setUser(null);
-                    navigate('/LogIn');
-                }
-            }).catch(error => error);
+                .then(result => {
+                    if (result.user) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Account Registration Successfull.",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setUser(null);
+                        navigate('/LogIn');
+                    }
+                }).catch(error => error);
         } else {
             setPassValidation("Password must be contain 1 UpperCase, 1 LowerCase, 1 special character and at least 6 characters.");
         }
@@ -62,7 +65,13 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                            <div className="relative">
+                                <input ref={passRef} type="password" name="password" placeholder="password" className="input input-bordered w-full" required />
+                                <p onClick={() => showPass(passRef)} className="absolute top-[30%] right-[6%]">
+                                    {isTrue ? <FaRegEye /> : <FaRegEyeSlash/>}
+                                </p>
+                            </div>
+
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
@@ -70,7 +79,7 @@ const Register = () => {
                         <div className="form-control my-2">
                             <button className="btn btn-primary">Register</button>
                         </div>
-                        <div className="text-center text-red-500">{ passValidation}</div>
+                        <div className="text-center text-red-500">{passValidation}</div>
                     </form>
 
                     <div className="mb-1 text-center">

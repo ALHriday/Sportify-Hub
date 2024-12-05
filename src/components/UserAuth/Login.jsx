@@ -1,13 +1,16 @@
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from 'sweetalert2'
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa6";
 
 const Login = () => {
 
-    const { createGoogleAccount, setUser, signInAccountWithEmailAndPass, passValidation, setPassValidation } = useContext(AuthContext);
+    const { createGoogleAccount, setUser, signInAccountWithEmailAndPass, passValidation, setPassValidation, showPass, isTrue } = useContext(AuthContext);
 
     const navigate = useNavigate();
+    const passRef = useRef();
 
     const handleLogIn = (e) => {
         e.preventDefault();
@@ -53,6 +56,7 @@ const Login = () => {
 
 
 
+
     return (
         <div className="hero bg-base-200 min-h-screen">
             <div className="hero-content flex-col lg:flex-row-reverse">
@@ -69,7 +73,12 @@ const Login = () => {
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input type="password" name="password" placeholder="password" className="input input-bordered" required />
+                            <div className="relative">
+                                <input ref={passRef} type="password" name="password" placeholder="password" className="input input-bordered w-full" required />
+                                <p onClick={() => showPass(passRef)} className="absolute top-[30%] right-[6%]">
+                                    {isTrue ? <FaRegEye /> : <FaRegEyeSlash />}
+                                </p>
+                            </div>
                             <label className="label">
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
@@ -77,7 +86,7 @@ const Login = () => {
                         <div className="form-control mt-3">
                             <button className="btn btn-primary">LogIn</button>
                         </div>
-                        <div className="text-center text-red-500">{ passValidation}</div>
+                        <div className="text-center text-red-500">{passValidation}</div>
                     </form>
 
                     <div className="text-center">
