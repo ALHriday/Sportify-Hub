@@ -93,7 +93,7 @@ const Login = () => {
                                 <img className="w-full h-full p-1" src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="" />
                             </div>
                             SignInWithGoogle</button>
-                        <div className="text-center my-1">
+                        <div className="text-center p-2 mb-2">
                             <p>{`Don't have an account`}<Link to='/Register' className="text-blue-500 underline pl-1">Register</Link></p>
                         </div>
                     </div>

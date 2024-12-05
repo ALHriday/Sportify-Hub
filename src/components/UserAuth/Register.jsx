@@ -5,18 +5,22 @@ import Swal from 'sweetalert2'
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
 
+
 const Register = () => {
 
     const { createAccountWithEmailAndPass, setUser, passValidation,
-        setPassValidation, showPass, isTrue } = useContext(AuthContext);
+        setPassValidation, showPass, isTrue, updateUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const passRef = useRef();
 
     const handleRegisterWithEmailAndPass = (e) => {
         e.preventDefault();
         const form = e.target;
+
+        const displayName = form.displayName.value;
+        const photoURL = form.photoURL.value;
         const email = form.email.value;
-        const password = form.password.value;
+        const password = form.password.value;     
 
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{6,}$/;
 
@@ -33,7 +37,10 @@ const Register = () => {
                             timer: 1500
                         });
                         setUser(null);
-                        navigate('/LogIn');
+                        updateUser({ displayName, photoURL })
+                            .then(() => navigate('/LogIn'))
+                        .catch(error => error
+                        )
                     }
                 }).catch(error => error);
         } else {
@@ -53,7 +60,13 @@ const Register = () => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" name="name" placeholder="Enter Name" className="input input-bordered" required />
+                            <input type="text" name="displayName" placeholder="Enter Name" className="input input-bordered" required />
+                        </div>
+                        <div className="form-control">
+                            <label className="label">
+                                <span className="label-text">PhotoURL</span>
+                            </label>
+                            <input type="text" name="photoURL" placeholder="Enter Name" className="input input-bordered" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
@@ -82,7 +95,7 @@ const Register = () => {
                         <div className="text-center text-red-500">{passValidation}</div>
                     </form>
 
-                    <div className="mb-1 text-center">
+                    <div className="mb-2 p-2 text-center">
                         <p>Already have an account.<Link to='/LogIn' className="text-blue-500 underline pl-1">LogIn</Link></p>
                     </div>
                 </div>

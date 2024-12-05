@@ -16,6 +16,7 @@ const Navbar = () => {
 
         return () => unSubscribe();
     }, [setUser]);
+    
 
     return (
         <div className="navbar bg-base-100">
@@ -80,8 +81,8 @@ const Navbar = () => {
                 {user ? <div className="flex justify-center items-center gap-3">
 
                     <div className="w-8 h-8 p-[2px] cursor-pointer rounded-full bg-slate-300">
-                        {user.photoURL ? <img className="rounded-full" src={user.photoURL} title={user.displayName} alt="" />
-                            : <img className="rounded-full" src="https://img.icons8.com/?size=100&id=kDoeg22e5jUY&format=png&color=000000" alt="" title={user.displayName} />}
+                        {user && user?.photoURL ? <img className="rounded-full" src={user?.photoURL} title={user.displayName} alt="" />
+                            : <img className="rounded-full" src="https://img.icons8.com/?size=100&id=kDoeg22e5jUY&format=png&color=000000" alt="" title={user?.displayName} />}
                     </div>
                     <Link className="btn btn-sm" onClick={handleLogOut} to='/LogIn'>LogOut</Link>
                 </div> :

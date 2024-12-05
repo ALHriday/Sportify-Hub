@@ -1,6 +1,6 @@
 # Sportify Hub
 
-Live Link : https://spotify-hub-web.netlify.app
+Live Link : https://sportify-hub-web.netlify.app
 
 ## Description : 
 
