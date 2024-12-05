@@ -28,7 +28,7 @@ const Register = () => {
                         Swal.fire({
                             position: "top-end",
                             icon: "success",
-                            title: "Account Registration Successfull.",
+                            title: "Account Registration Successful.",
                             showConfirmButton: false,
                             timer: 1500
                         });
