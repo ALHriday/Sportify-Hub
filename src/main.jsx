@@ -15,6 +15,8 @@ import Login from './components/UserAuth/Login.jsx';
 import ErrorPage from './components/ErrorPage/ErrorPage.jsx';
 import About from './components/About.jsx';
 import PrivateRoute from './Routes/PrivateRoute.jsx';
+import AddEquipment from './components/AddEquipment.jsx';
+import EquipmentDetails from './components/EquipmentDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,7 +30,13 @@ const router = createBrowserRouter([
       },
       {
         path: '/Equipments',
+        loader: () => fetch('http://localhost:2100/products'),
         element: <Equipments/>
+      },
+      {
+        path: '/Equipments/:id',
+        loader: ({params}) => fetch(`http://localhost:2100/products/${params.id}`),
+        element: <EquipmentDetails/>
       },
       {
         path: '/Register',
@@ -37,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: '/LogIn',
         element: <Login/>
+      },
+      {
+        path: '/AddEquipment',
+        element: <AddEquipment></AddEquipment>
       },
       {
         path: '/About',
