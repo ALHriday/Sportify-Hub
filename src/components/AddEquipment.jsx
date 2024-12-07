@@ -44,59 +44,58 @@ const AddEquipment = () => {
         })
     }
 
-
     return (
 
         <div className="">
-            <h1 className="text-4xl text-center font-bold w-1/2 mx-auto py-4">Add Sports Equipment</h1>
-            <form onSubmit={handleAddEquipment} className="card-body grid grid-cols-2 gap-4 w-1/2 mx-auto">
+            <h1 className="text-4xl text-center font-bold w-5/6 md:w-1/2 mx-auto py-4">Add Sports Equipment</h1>
+            <form onSubmit={handleAddEquipment} className="card-body grid grid-cols-2 gap-4 md:w-1/2 mx-auto">
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Product Name</span>
                     </label>
-                    <input type="text" name="pName" placeholder="Enter Name" className="input input-bordered" required />
+                    <input type="text" name="pName" placeholder="Product Name" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Price</span>
                     </label>
-                    <input type="number" name="price" placeholder="Enter Name" className="input input-bordered" required />
+                    <input type="number" name="price" placeholder="Product Price" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Category</span>
                     </label>
-                    <input type="text" name="category" placeholder="Enter Name" className="input input-bordered" required />
+                    <input type="text" name="category" placeholder="Product Category" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">PhotoURL</span>
                     </label>
-                    <input type="text" name="photoURL" placeholder="Enter Name" className="input input-bordered" required />
+                    <input type="text" name="photoURL" placeholder="PhotoURL" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Rating</span>
                     </label>
-                    <input type="text" name="rating" placeholder="" className="input input-bordered" required />
+                    <input type="text" name="rating" placeholder="Rating" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Stock Status</span>
                     </label>
-                    <input type="text" name="stockStatus" placeholder="" className="input input-bordered" required />
+                    <input type="text" name="stockStatus" placeholder="Stock" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Bat With Extra Grip</span>
                     </label>
-                    <input type="text" name="batWithExtraGrip" placeholder="" className="input input-bordered" />
+                    <input type="text" name="batWithExtraGrip" placeholder="Yes/No" className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Processing Time</span>
                     </label>
-                    <input type="text" name="processingTime" placeholder="" className="input input-bordered" required />
+                    <input type="text" name="processingTime" placeholder="Processing Time" className="input input-bordered" required />
                 </div>
 
                 <div className="form-control">

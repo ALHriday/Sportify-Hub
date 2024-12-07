@@ -39,10 +39,6 @@ const Products = () => {
                         <button className="btn btn-sm bg-teal-600 hover:bg-teal-700 text-white">Add to Cart</button>
                         <button className="btn btn-sm bg-teal-600 hover:bg-teal-700 text-white">Purchase</button>
                     </div>
-                    {/* <div className="flex justify-center items-center pb-2">
-                        <button className="btn btn-md bg-teal-600 hover:bg-teal-700 text-white">Details</button>
-                        
-                    </div> */}
                 </div>
             </div>)}
         </div>

@@ -1,11 +1,13 @@
 import { Link, useLoaderData } from "react-router-dom";
 import '../components/Equipments.css';
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Equipments = () => {
     const [data, setData] = useState([]);
-    // const [price, setPrice] = useState(0);
     const products = useLoaderData();
+
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         setData(products)
@@ -57,6 +59,10 @@ const Equipments = () => {
 
 
             </table>
+            <div className="flex justify-center items-center p-4">
+                {user ? <Link className="btn" to='/AddEquipment'>Add Equipment</Link> : ''}
+                
+            </div>
         </div>
     );
 };
