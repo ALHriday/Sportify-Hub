@@ -26,7 +26,7 @@ const AddEquipment = () => {
 
         console.log(productInfo);
 
-        fetch('http://localhost:2100/products', {
+        fetch('https://sportify-hub-server.vercel.app/products', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(productInfo)
@@ -41,8 +41,7 @@ const AddEquipment = () => {
                     timer: 1500
                 });
             }
-        }
-        )
+        })
     }
 
 

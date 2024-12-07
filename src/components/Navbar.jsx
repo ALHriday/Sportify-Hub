@@ -41,17 +41,18 @@ const Navbar = () => {
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         <Link to='/'>Home</Link>
                         <Link to='/Equipments'>Equipments</Link>
-                        {user ? <Link to='/About'>About</Link> : ''}
+                        {user ? <Link to='/AddEquipment'>Add Equipment</Link> : ''}
+                        <Link to='/About'>About</Link>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Sportify Hub</a>
+                <a className="md:btn md:btn-ghost text-xl">Sportify Hub</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 gap-3">
                     <Link to='/'>Home</Link>
                     <Link to='/Equipments'>Equipments</Link>
-                    {user ? <Link to='/About'>About</Link> : ''}
-
+                    {user ? <Link to='/AddEquipment'>Add Equipment</Link> : ''}
+                    <Link to='/About'>About</Link>
                 </ul>
             </div>
             <div className="navbar-end gap-3">
@@ -80,9 +81,9 @@ const Navbar = () => {
 
                 {user ? <div className="flex justify-center items-center gap-3">
 
-                    <div className="w-8 h-8 p-[2px] cursor-pointer rounded-full bg-slate-300">
-                        {user && user?.photoURL ? <img className="rounded-full" src={user?.photoURL} title={user.displayName} alt="" />
-                            : <img className="rounded-full" src="https://img.icons8.com/?size=100&id=kDoeg22e5jUY&format=png&color=000000" alt="" title={user?.displayName} />}
+                    <div className="w-9 h-9 p-[2px] cursor-pointer rounded-full bg-slate-300">
+                        {user && user?.photoURL ? <img className="rounded-full w-full h-full" src={user?.photoURL} title={user.displayName} alt="" />
+                            : <img className="rounded-full w-full h-full" src="https://img.icons8.com/?size=100&id=kDoeg22e5jUY&format=png&color=000000" alt="" title={user?.displayName} />}
                     </div>
                     <Link className="btn btn-sm" onClick={handleLogOut} to='/LogIn'>LogOut</Link>
                 </div> :

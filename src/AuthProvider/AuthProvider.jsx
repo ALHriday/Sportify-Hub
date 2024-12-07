@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import PropTypes from "prop-types";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { auth } from "../components/UserAuth/firebase.init";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -11,12 +11,22 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [passValidation, setPassValidation] = useState([]);
     const [isTrue, setIsTrue] = useState(true);
+    const [products, setProducts] = useState([]);
 
     // if (loading) {
     //     <div className="flex justify-center items-center">
     //         loading....
     //     </div>
     // }
+    useEffect(() => {
+        fetch('https://sportify-hub-server.vercel.app/products')
+            .then(res => res.json())
+            .then(data => {
+                setLoading(true);
+                const productData = data.slice(0, 6);             
+                setProducts(productData);
+            })
+    },[])
 
     const createGoogleAccount = () => {
         setLoading(true);
@@ -64,7 +74,8 @@ const AuthProvider = ({ children }) => {
         showPass,
         isTrue,
         setIsTrue,
-        updateUser
+        updateUser,
+        products
     }
 
     return (

@@ -51,7 +51,7 @@ const Login = () => {
                     navigate('/');
                 }
 
-            }).catch(error => error)
+            }).catch(() => setPassValidation('Invalid! Please try again.'))
     }
 
 
@@ -74,7 +74,7 @@ const Login = () => {
                             <div className="relative">
                                 <input ref={passRef} type="password" name="password" placeholder="password" className="input input-bordered w-full" required />
                                 <p onClick={() => showPass(passRef)} className="absolute top-[30%] right-[6%]">
-                                    {isTrue ? <FaRegEye /> : <FaRegEyeSlash />}
+                                    {isTrue ? <FaRegEyeSlash /> : <FaRegEye />}
                                 </p>
                             </div>
                             <label className="label">

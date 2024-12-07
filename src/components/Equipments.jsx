@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const Equipments = () => {
     const [data, setData] = useState([]);
+    // const [price, setPrice] = useState(0);
     const products = useLoaderData();
 
     useEffect(() => {
@@ -26,6 +27,7 @@ const Equipments = () => {
             <table>
                 <thead>
                     <tr>
+                        <th>No. </th>
                         <th>Product Name</th>
                         <th>Category</th>
                         <th>Rating</th>
@@ -36,7 +38,9 @@ const Equipments = () => {
                 </thead>
 
                 <tbody>
-                    {data && data.map(product => <tr key={product._id}>
+                    {data && data.map((product, idx) => <tr key={product._id}>
+                    {/* { setPrice(price + product.price)} */}
+                        <td>{idx + 1}</td>
                         <td>{product.pName}</td>
                         <td>{product.category}</td>
                         <td>{product.rating}</td>
@@ -47,7 +51,7 @@ const Equipments = () => {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td>All Products List</td>
+                        <td>All Products</td>
                     </tr>
                 </tfoot>
 

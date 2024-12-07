@@ -17,6 +17,7 @@ import About from './components/About.jsx';
 import PrivateRoute from './Routes/PrivateRoute.jsx';
 import AddEquipment from './components/AddEquipment.jsx';
 import EquipmentDetails from './components/EquipmentDetails.jsx';
+import Products from './components/Products.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,12 +31,12 @@ const router = createBrowserRouter([
       },
       {
         path: '/Equipments',
-        loader: () => fetch('http://localhost:2100/products'),
-        element: <PrivateRoute><Equipments/></PrivateRoute>
+        loader: () => fetch('https://sportify-hub-server.vercel.app/products'),
+        element: <Equipments/>
       },
       {
         path: '/Equipments/:id',
-        loader: ({params}) => fetch(`http://localhost:2100/products/${params.id}`),
+        loader: ({params}) => fetch(`https://sportify-hub-server.vercel.app/products/${params.id}`),
         element: <PrivateRoute><EquipmentDetails/></PrivateRoute>
       },
       {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: '/AddEquipment',
         element: <PrivateRoute><AddEquipment/></PrivateRoute>
+      },
+      {
+        path: '/products',
+        element: <Products></Products>
       },
       {
         path: '/About',
