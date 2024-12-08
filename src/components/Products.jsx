@@ -6,12 +6,12 @@ import { Link } from "react-router-dom";
 
 const Products = () => {
 
-    const { products } = useContext(AuthContext);
+    const { cardData } = useContext(AuthContext);
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 p-4">
             <h1 className="col-span-1 sm:col-span-2 md:col-span-3 py-6 px-4 text-4xl md:text-5xl font-bold">Sporting Excellence Starts Here</h1>
-            {products && products.map((product, idx) => <div key={idx}>
+            {cardData && cardData.map((product, idx) => <div key={idx}>
                 <div className="card bg-base-100 shadow-xl">
 
                     <div className="h-[200px] sm:h-[280px] md:h-[320px] lg:h-[300px] p-4 rounded-xl">

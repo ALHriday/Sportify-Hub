@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../components/UserAuth/firebase.init";
@@ -11,22 +11,19 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [passValidation, setPassValidation] = useState([]);
     const [isTrue, setIsTrue] = useState(true);
-    const [products, setProducts] = useState([]);
+    const [cardData, setCardData] = useState([]);
 
-    // if (loading) {
-    //     <div className="flex justify-center items-center">
-    //         loading....
-    //     </div>
-    // }
+    
     useEffect(() => {
         fetch('https://sportify-hub-server.vercel.app/products')
             .then(res => res.json())
             .then(data => {
                 setLoading(true);
-                const productData = data.slice(0, 6);             
-                setProducts(productData);
+                const productData = [...data].slice(0, 6);             
+                setCardData(productData);
             })
-    },[])
+    }, [])
+    
 
     const createGoogleAccount = () => {
         setLoading(true);
@@ -47,6 +44,7 @@ const AuthProvider = ({ children }) => {
         return signOut(auth);
     }
     const updateUser = (userInfo) => {
+        setLoading(true);
         return updateProfile(auth.currentUser, userInfo);
     }
 
@@ -60,6 +58,14 @@ const AuthProvider = ({ children }) => {
             input.current.type = 'password';
         }
     }
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+            setUser(currentUser);
+            setLoading(false);
+        });
+        
+        return () => unSubscribe();
+    }, []);
 
     const values = {
         user,
@@ -75,7 +81,7 @@ const AuthProvider = ({ children }) => {
         isTrue,
         setIsTrue,
         updateUser,
-        products
+        cardData,
     }
 
     return (

@@ -1,22 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext} from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./UserAuth/firebase.init";
+
 
 const Navbar = () => {
 
-    const { user, handleLogOut, setUser } = useContext(AuthContext);
-
-    useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, currentUser => {
-            setUser(currentUser);
-            // setLoading(false);
-        });
-
-        return () => unSubscribe();
-    }, [setUser]);
-    
+    const { user, handleLogOut} = useContext(AuthContext); 
 
     return (
         <div className="navbar bg-base-100">

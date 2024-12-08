@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 
 const UpdateEquipment = () => {
     const { user } = useContext(AuthContext);
 
     const products = useLoaderData();
+    const navigate = useNavigate();
     
     const {_id, pName, price, category, rating, stockStatus, batWithExtraGrip, processingTime, photoURL } = products;
 
@@ -40,6 +41,7 @@ const UpdateEquipment = () => {
                     showConfirmButton: false,
                     timer: 1500
                 });
+                navigate(-1);
             }
         })
     }
@@ -100,13 +102,13 @@ const UpdateEquipment = () => {
                     <label className="label">
                         <span className="label-text">User Name</span>
                     </label>
-                    <input type="text" name="userName" defaultValue={user?.displayName} placeholder="User Name" className="input input-bordered" required />
+                    <input type="text" name="userName" disabled defaultValue={user?.displayName} placeholder="User Name" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Email</span>
                     </label>
-                    <input type="email" name="email" defaultValue={user?.email} placeholder="Email" className="input input-bordered" required />
+                    <input type="email" name="email" disabled defaultValue={user?.email} placeholder="Email" className="input input-bordered" required />
                 </div>
 
                 <div className="form-control my-2 col-span-2">

@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData} from "react-router-dom";
 import '../components/Equipments.css';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
@@ -7,16 +7,17 @@ import { MdDeleteForever } from "react-icons/md";
 
 const Equipments = () => {
     const [data, setData] = useState([]);
-    const products = useLoaderData();
+    const productsData = useLoaderData();
+
+    useEffect(() => {
+        setData(productsData)
+    }, [productsData]);
 
     const { user } = useContext(AuthContext);
 
-    useEffect(() => {
-        setData(products)
-    }, [products])
-
     const sortData = () => {
-        const sorted = [...data].sort((a, b) => b.price - a.price)
+        const productData = [...data];
+        const sorted = productData.sort((a, b) => b.price - a.price)
         setData(sorted);
     }
 
@@ -44,10 +45,10 @@ const Equipments = () => {
                 <tbody>
                     {data && data.map((product, idx) => <tr key={product._id}>
                         <td>{idx + 1}</td>
-                        <td>{product.pName}</td>
-                        <td>{product.category}</td>
-                        <td>{product.stockStatus}</td>
-                        <td>{product.price}$</td>
+                        <td>{product?.pName}</td>
+                        <td>{product?.category}</td>
+                        <td>{product?.stockStatus}</td>
+                        <td>{product?.price}$</td>
                         <td><Link to={`/Equipments/${product._id}`} className="btn btn-link">Details</Link></td>
                         <td>
                             <div className="flex justify-center items-center gap-1 md:gap-2 ">
