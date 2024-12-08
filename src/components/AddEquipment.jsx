@@ -24,15 +24,12 @@ const AddEquipment = () => {
 
         const productInfo = { pName, price, category, rating, stockStatus, batWithExtraGrip, processingTime, photoURL, userName, email };
 
-        console.log(productInfo);
-
         fetch('https://sportify-hub-server.vercel.app/products', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(productInfo)
         }).then(res => res.json()).then(result => {
             if (result.insertedId) {
-                console.log(result);
                 Swal.fire({
                     position: "top-end",
                     icon: "success",

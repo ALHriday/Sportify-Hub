@@ -31,7 +31,7 @@ const AuthProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     }
     const createAccountWithEmailAndPass = (email, password) => {
-        setLoading(true)
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
     const signInAccountWithEmailAndPass = (email, password) => {
@@ -59,13 +59,14 @@ const AuthProvider = ({ children }) => {
         }
     }
     useEffect(() => {
+        
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             setLoading(false);
         });
         
         return () => unSubscribe();
-    }, []);
+    }, [setLoading]);
 
     const values = {
         user,

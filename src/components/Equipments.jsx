@@ -1,9 +1,10 @@
-import { Link, useLoaderData} from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import '../components/Equipments.css';
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import Swal from "sweetalert2";
 
 const Equipments = () => {
     const [data, setData] = useState([]);
@@ -19,6 +20,35 @@ const Equipments = () => {
         const productData = [...data];
         const sorted = productData.sort((a, b) => b.price - a.price)
         setData(sorted);
+    }
+
+    const handleDeleteProduct = (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`https://sportify-hub-server.vercel.app/products/${id}`, {
+                    method: 'DELETE',
+                }).then(res => res.json()).then(result => {
+                    if (result.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                        });
+                        const remainingProduct = data.filter(d => d._id !== id);
+                        setData(remainingProduct);
+                    }
+                })
+            }
+        });    
     }
 
     return (
@@ -45,26 +75,26 @@ const Equipments = () => {
                 <tbody>
                     {data && data.map((product, idx) => <tr key={product._id}>
                         <td>{idx + 1}</td>
-                        <td>{product?.pName}</td>
-                        <td>{product?.category}</td>
-                        <td>{product?.stockStatus}</td>
-                        <td>{product?.price}$</td>
+                        <td>{product.pName}</td>
+                        <td>{product.category}</td>
+                        <td>{product.stockStatus}</td>
+                        <td>{product.price}$</td>
                         <td><Link to={`/Equipments/${product._id}`} className="btn btn-link">Details</Link></td>
                         <td>
                             <div className="flex justify-center items-center gap-1 md:gap-2 ">
-                            <Link to={`/UpdateEquipment/${product._id}`} className="btn btn-sm btn-info">
-                                <FaEdit />
-                            </Link>
-                            <Link className="btn btn-sm btn-error">
-                                <MdDeleteForever />
-                            </Link>
+                                <Link to={`/UpdateEquipment/${product._id}`} className="btn btn-sm btn-info">
+                                    <FaEdit />
+                                </Link>
+                                <Link onClick={() => handleDeleteProduct(product._id)} className="btn btn-sm btn-error">
+                                    <MdDeleteForever />
+                                </Link>
                             </div>
                         </td>
                     </tr>)}
                 </tbody>
                 <tfoot>
                     <tr className="text-center">
-                       <td>All Products</td>
+                        <td>All Products</td>
                     </tr>
                 </tfoot>
 

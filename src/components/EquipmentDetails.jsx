@@ -2,7 +2,7 @@ import { Link, useLoaderData } from "react-router-dom";
 
 const EquipmentDetails = () => {
     const product = useLoaderData();
-    const { pName, photoURL, category} = product;
+    const { pName, price, category, rating, stockStatus, batWithExtraGrip, processingTime, photoURL} = product;
 
     return (
         <div className="min-h-screen">
@@ -19,9 +19,14 @@ const EquipmentDetails = () => {
 
                         <div className="card-body">
                             <h2 className="card-title">{pName}</h2>
-                            <p>{category}</p>
+                            <p>Category: {category}</p>
+                            <p>Price: {price}$</p>
+                            <p>Stock Status: {stockStatus}</p>
+                            <p>BatWithExtraGrip: {batWithExtraGrip}</p>
+                            <p>Processing Time: {processingTime}</p>
+                            <p>Rating: {rating}</p>
 
-                            <div className="card-actions justify-end">
+                            <div className="w-full card-actions justify-end">
                                 <Link to='/Equipments'>                                <button className="btn btn-primary w-full">X</button>
                                 </Link>
                             </div>

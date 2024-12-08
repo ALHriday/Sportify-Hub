@@ -9,7 +9,7 @@ const UpdateEquipment = () => {
     const products = useLoaderData();
     const navigate = useNavigate();
     
-    const {_id, pName, price, category, rating, stockStatus, batWithExtraGrip, processingTime, photoURL } = products;
+    const {_id, pName, price, category, rating, stockStatus, batWithExtraGrip, processingTime, photoURL } = products || {};
 
 
     const handleUpdateEquipment = (event) => {
