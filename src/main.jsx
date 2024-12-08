@@ -18,6 +18,7 @@ import PrivateRoute from './Routes/PrivateRoute.jsx';
 import AddEquipment from './components/AddEquipment.jsx';
 import EquipmentDetails from './components/EquipmentDetails.jsx';
 import Products from './components/Products.jsx';
+import UpdateEquipment from './components/UpdateEquipment.jsx';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
         path: '/Equipments/:id',
         loader: ({params}) => fetch(`https://sportify-hub-server.vercel.app/products/${params.id}`),
         element: <PrivateRoute><EquipmentDetails/></PrivateRoute>
+      },
+      {
+        path: '/UpdateEquipment/:id',
+        loader: ({params}) => fetch(`https://sportify-hub-server.vercel.app/products/${params.id}`),
+        element: <PrivateRoute><UpdateEquipment/></PrivateRoute>
       },
       {
         path: '/Register',

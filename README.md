@@ -16,11 +16,12 @@ Sportify Hub is your ultimate destination for all things sports. From premium eq
 6. High-Quality Products
 7. SPA
 
-## 5 React uses features : 
+## Some uses React features : 
 
 1. useState Hook
 2. useEffect Hook
 3. useNavigate
 4. useLoader
 5. contextApi
+6. useRef
 
