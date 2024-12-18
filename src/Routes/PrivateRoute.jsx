@@ -8,7 +8,7 @@ import LoadingPage from "../components/ErrorPage/LoadingPage";
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useContext(AuthContext);
 
-    if (!loading) {
+    if (loading) {
         return <LoadingPage></LoadingPage>
     }
 
