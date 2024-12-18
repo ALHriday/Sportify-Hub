@@ -66,7 +66,7 @@ const AuthProvider = ({ children }) => {
         });
         
         return () => unSubscribe();
-    }, [setLoading]);
+    }, []);
 
     const values = {
         user,
