@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Tooltip } from 'react-tooltip'
-import { FaStar } from "react-icons/fa";
+import { FaEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Products = () => {
@@ -9,39 +9,50 @@ const Products = () => {
     const { cardData } = useContext(AuthContext);
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 p-4">
-            <h1 className="col-span-1 sm:col-span-2 md:col-span-3 py-6 px-4 text-4xl md:text-5xl font-bold">Sporting Excellence Starts Here</h1>
-            {cardData && cardData.map((product, idx) => <div key={idx}>
-                <div className="card bg-base-100 shadow-xl">
+        <div className="p-4">
+            <div>
 
-                    <div className="h-[200px] sm:h-[280px] md:h-[320px] lg:h-[300px] p-4 rounded-xl">
-                        <a data-tooltip-id="my-tooltip" data-tooltip-content={`${product?.pName}`}>
-                        <Tooltip id="my-tooltip" />
-                            <img className="w-full h-full rounded-xl"
-                                src={product?.photoURL}
-                                alt="Shoes" />
-                        </a>
-
-                    </div>
-                    <div className="p-4 flex flex-col justify-center items-center gap-1">
-                        <h2 className="card-title">
-                            {product?.pName}
-                        </h2>
-                        <p>{product?.category}</p>
-                        <p className="font-bold">Price: {product?.price}$</p>
-                        <div className="flex gap-1 justify-center items-center">
-                        <p className="font-bold">Rating: {product?.rating}
-                        </p><FaStar/>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {cardData.map(product =>
+                    <div key={product._id} className="card bg-base-100 shadow-xl relative">
+                        <div className="h-[280px] md:h-[300px] lg:h-[280px] p-4 rounded-xl">
+                            <a data-tooltip-id="my-tooltip" data-tooltip-content={`${product.pName}`}>
+                                <Tooltip id="my-tooltip" />
+                                <img className="w-full h-full rounded-xl"
+                                    src={product.photoURL}
+                                />
+                            </a>
                         </div>
-                        <Link to={`/Equipments/${product._id}`} className="btn-link py-2">Details</Link>
+
+                        <div className="p-4 flex flex-col gap-1">
+                            <div className="flex justify-center items-center gap-1">
+                                <div className="flex flex-wrap gap-1">
+                                    <p className="text-2xl">{product.pName}</p>
+                                    <p className="badge badge-secondary">{product.rating}</p>
+                                </div>
+                            </div>
+
+
+                            <div className="flex flex-col justify-center items-center gap-1">
+                                <p className="text-md text-bold">{product.category}</p>
+                                <p className="text-xl font-bold">${product.price}</p>
+                            </div>
+
+                        </div>
+
+                        <div className="w-full flex justify-center items-center gap-2 px-2 pb-4">
+                            <button className="btn bg-teal-500 hover:bg-teal-700 text-black">Add to Cart</button>
+                            <button className="btn bg-teal-500 hover:bg-teal-700 text-black">Purchase</button>
+
+                            <Link to={`/Equipments/${product._id}`} className="badge badge-neutral py-2 ml-2 btn"> <FaEye /> </Link>
+                        </div>
                     </div>
-                    <div className="flex justify-center items-center gap-2 px-2 pb-4">
-                        <button className="btn btn-sm bg-teal-600 hover:bg-teal-700 text-white">Add to Cart</button>
-                        <button className="btn btn-sm bg-teal-600 hover:bg-teal-700 text-white">Purchase</button>
-                    </div>
-                </div>
-            </div>)}
+                )}
+
+            </div>
         </div>
+
     );
 };
 

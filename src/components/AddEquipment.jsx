@@ -9,6 +9,8 @@ const AddEquipment = () => {
     const handleAddEquipment = (e) => {
         e.preventDefault();
         const form = e.target;
+        
+        
 
         const pName = form.pName.value;
         const price = form.price.value;
@@ -99,13 +101,13 @@ const AddEquipment = () => {
                     <label className="label">
                         <span className="label-text">User Name</span>
                     </label>
-                    <input type="text" name="userName" defaultValue={user?.displayName} placeholder="User Name" className="input input-bordered" required />
+                    <input type="text" name="userName" defaultValue={user?.displayName} readOnly placeholder="User Name" className="input input-bordered" required />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Email</span>
                     </label>
-                    <input type="email" name="email" defaultValue={user?.email} placeholder="Email" className="input input-bordered" required />
+                    <input type="email" name="email" defaultValue={user?.email} readOnly placeholder="Email" className="input input-bordered" required />
                 </div>
 
                 <div className="form-control my-2 col-span-2">

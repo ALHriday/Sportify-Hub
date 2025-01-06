@@ -12,13 +12,15 @@ const AuthProvider = ({ children }) => {
     const [passValidation, setPassValidation] = useState([]);
     const [isTrue, setIsTrue] = useState(true);
     const [cardData, setCardData] = useState([]);
+    const [equipmentdata, setEquipmentdata] = useState([]);
 
     
     useEffect(() => {
         fetch('https://sportify-hub-server.vercel.app/products')
             .then(res => res.json())
             .then(data => {
-                setLoading(true);
+                setLoading(false);
+                setEquipmentdata(data);
                 const productData = [...data].slice(0, 6);             
                 setCardData(productData);
             })
@@ -51,10 +53,10 @@ const AuthProvider = ({ children }) => {
     const showPass = (input) => {
 
         if (input.current.type === 'password') {
-            setIsTrue(false);
+            // setIsTrue(false);
             input.current.type = 'text';
         } else {
-            setIsTrue(true);
+            // setIsTrue(true);
             input.current.type = 'password';
         }
     }
@@ -76,6 +78,7 @@ const AuthProvider = ({ children }) => {
         createAccountWithEmailAndPass,
         signInAccountWithEmailAndPass,
         loading,
+        setLoading,
         passValidation,
         setPassValidation,
         showPass,
@@ -83,6 +86,8 @@ const AuthProvider = ({ children }) => {
         setIsTrue,
         updateUser,
         cardData,
+        equipmentdata,
+        setEquipmentdata
     }
 
     return (

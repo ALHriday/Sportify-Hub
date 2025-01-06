@@ -30,17 +30,23 @@ const Navbar = () => {
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                         <Link to='/'>Home</Link>
                         <Link to='/Equipments'>Equipments</Link>
-                        {user ? <Link to='/AddEquipment'>Add Equipment</Link> : ''}
+                        {user ? <>
+                        <Link to='/AddEquipment'>Add Equipment</Link>
+                        <Link to='/myEquipment'>My Equipments</Link>
+                    </> : ''}
                         <Link to='/About'>About</Link>
                     </ul>
                 </div>
-                <a className="md:btn md:btn-ghost text-xl">Sportify Hub</a>
+                <Link to='/' className="text-xl sm:text-2xl font-bold">Sportify Hub</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 gap-3">
                     <Link to='/'>Home</Link>
                     <Link to='/Equipments'>Equipments</Link>
-                    {user ? <Link to='/AddEquipment'>Add Equipment</Link> : ''}
+                    {user ? <>
+                        <Link to='/AddEquipment'>Add Equipment</Link>
+                        <Link to='/myEquipment'>My Equipments</Link>
+                    </> : ''}
                     <Link to='/About'>About</Link>
                 </ul>
             </div>
