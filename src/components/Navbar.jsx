@@ -1,11 +1,12 @@
-import { useContext} from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import { FaCartArrowDown } from "react-icons/fa";
 
 
 const Navbar = () => {
 
-    const { user, handleLogOut} = useContext(AuthContext); 
+    const { user, handleLogOut } = useContext(AuthContext);
 
     return (
         <div className="navbar bg-base-100">
@@ -31,10 +32,14 @@ const Navbar = () => {
                         <Link to='/'>Home</Link>
                         <Link to='/Equipments'>Equipments</Link>
                         {user ? <>
-                        <Link to='/AddEquipment'>Add Equipment</Link>
-                        <Link to='/myEquipment'>My Equipments</Link>
-                    </> : ''}
+                            <Link to='/AddEquipment'>Add Equipment</Link>
+                            <Link to='/myEquipment'>My Equipments</Link>
+                        </> : ''}
                         <Link to='/About'>About</Link>
+
+                        <div className="flex md:hidden mt-2">
+                            <Link className="btn btn-sm" to='/carts'> <FaCartArrowDown /> </Link>
+                        </div>
                     </ul>
                 </div>
                 <Link to='/' className="text-xl sm:text-2xl font-bold">Sportify Hub</Link>
@@ -51,6 +56,9 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end gap-3">
+                <div className="hidden md:flex">
+                    <Link className="btn" to='/carts'> <FaCartArrowDown /> </Link>
+                </div>
                 <label className="swap swap-rotate mt-1">
                     {/* this hidden checkbox controls the state */}
                     <input type="checkbox" className="theme-controller" value="light" />
@@ -87,6 +95,7 @@ const Navbar = () => {
                         <Link className="btn btn-sm" to='/LogIn'>LogIn</Link>
                     </div>
                 }
+
 
             </div>
         </div>

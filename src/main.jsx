@@ -20,6 +20,8 @@ import EquipmentDetails from './components/EquipmentDetails.jsx';
 import Products from './components/Products.jsx';
 import UpdateEquipment from './components/UpdateEquipment.jsx';
 import MyEquipment from './components/MyEquipment.jsx';
+import Cart from './components/Cart/Cart.jsx';
+import Carts from './components/Carts/Carts.jsx';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +67,14 @@ const router = createBrowserRouter([
       {
         path: '/products',
         element: <Products></Products>
+      },
+      {
+        path: '/cart',
+        element: <Cart/>       
+      },
+      {
+        path: '/carts',
+        element: <Carts/>       
       },
       {
         path: '/About',

@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 // import { FaStar } from "react-icons/fa";
 import PropTypes from "prop-types";
 import { FaEye } from "react-icons/fa";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Equipment = ({ product }) => {
+    const { HandleAddToCart } = useContext(AuthContext);
 
     const { _id, photoURL, pName, rating, price, category } = product;
 
@@ -29,16 +32,14 @@ const Equipment = ({ product }) => {
                     </div>
                 </div>
                 
-
                 <div className="flex flex-col justify-center items-center gap-1">
                     <p className="text-md text-bold">{category}</p>
                     <p className="text-xl font-bold">${price}</p>
                 </div>
-
             </div>
 
             <div className="w-full flex justify-center items-center gap-2 px-2 pb-4">
-                <button className="btn bg-teal-500 hover:bg-teal-700 text-black">Add to Cart</button>
+                <button onClick={() => HandleAddToCart(product)} className="btn bg-teal-500 hover:bg-teal-700 text-black">Add to Cart</button>
                 <button className="btn bg-teal-500 hover:bg-teal-700 text-black">Purchase</button>
 
                 <Link to={`/Equipments/${_id}`} className="badge badge-neutral py-2 ml-2 btn"> <FaEye/> </Link>

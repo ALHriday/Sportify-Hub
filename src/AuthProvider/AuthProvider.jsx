@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged,
 import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../components/UserAuth/firebase.init";
+import Swal from "sweetalert2";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
@@ -13,19 +14,20 @@ const AuthProvider = ({ children }) => {
     const [isTrue, setIsTrue] = useState(true);
     const [cardData, setCardData] = useState([]);
     const [equipmentdata, setEquipmentdata] = useState([]);
+    const [cartItem, setCartItem] = useState([]);
 
-    
+
     useEffect(() => {
         fetch('https://sportify-hub-server.vercel.app/products')
             .then(res => res.json())
             .then(data => {
                 setLoading(false);
                 setEquipmentdata(data);
-                const productData = [...data].slice(0, 6);             
+                const productData = [...data].slice(0, 6);
                 setCardData(productData);
             })
     }, [])
-    
+
 
     const createGoogleAccount = () => {
         setLoading(true);
@@ -60,13 +62,47 @@ const AuthProvider = ({ children }) => {
             input.current.type = 'password';
         }
     }
+
+    const HandleAddToCart = (product) => {
+
+        const userEmail = user.email;
+
+        const { pName, price, category, photoURL } = product;
+
+        const productData = { pName, price, category, photoURL, userEmail }
+
+        fetch('https://sportify-hub-server.vercel.app/cartItem', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(productData)
+        }).then(res => res.json()).then(result => {
+
+            if (!result.insertedId) {
+                return  alert('Product Already Exist.');
+            }
+
+            if (result.insertedId) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${product.pName} added successful`,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+
+                setCartItem([...cartItem, productData]);
+            }
+        });
+    }
+    
+
+
     useEffect(() => {
-        
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
             setLoading(false);
         });
-        
+
         return () => unSubscribe();
     }, []);
 
@@ -87,7 +123,10 @@ const AuthProvider = ({ children }) => {
         updateUser,
         cardData,
         equipmentdata,
-        setEquipmentdata
+        setEquipmentdata,
+        setCartItem,
+        cartItem,
+        HandleAddToCart,
     }
 
     return (
