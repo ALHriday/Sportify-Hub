@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAsum1bxHEKj_-VVgW6_6xQXAvSSjgINBA",
-  authDomain: "sportify-hub.firebaseapp.com",
-  projectId: "sportify-hub",
-  storageBucket: "sportify-hub.firebasestorage.app",
-  messagingSenderId: "239686371457",
-  appId: "1:239686371457:web:39fbc6d165d6d03f29a580"
+  apiKey: import.meta.env.VITE_apiKey,
+  authDomain: import.meta.env.VITE_authDomain,
+  projectId: import.meta.env.VITE_projectId,
+  storageBucket: import.meta.env.VITE_storageBucket,
+  messagingSenderId: import.meta.env.VITE_messagingSenderId,
+  appId: import.meta.env.VITE_appId,
 };
 
 // Initialize Firebase
