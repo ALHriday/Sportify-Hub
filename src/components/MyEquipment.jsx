@@ -5,19 +5,25 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const MyEquipment = () => {
     const { user, setLoading } = useContext(AuthContext);
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch(`https://sportify-hub-server.vercel.app/myEquipment/${user?.email}`)
-            .then(res => res.json())
-            .then(data => {
-                setData(data);
+        // fetch(`https://sportify-hub-server.vercel.app/myEquipment/${user?.email}`)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         setData(data);
+        //         setLoading(false);
+        //     })
+        axios.get(`https://sportify-hub-server.vercel.app/myEquipment?email=${user.email}`, { withCredentials: true })
+            .then(res => {
+                setData(res.data);
                 setLoading(false);
             })
-    }, [user, setLoading]);
+    }, [setLoading, user]);
 
 
     const sortData = () => {

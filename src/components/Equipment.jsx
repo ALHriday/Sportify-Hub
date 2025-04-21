@@ -18,7 +18,7 @@ const Equipment = ({ product }) => {
             <div className="h-[280px] md:h-[300px] lg:h-[280px] p-4 rounded-xl">
                 <a data-tooltip-id="my-tooltip" data-tooltip-content={`${pName}`}>
                     <Tooltip id="my-tooltip" />
-                    <img className="w-full h-full rounded-xl"
+                    <img className="w-full h-full object-cover rounded-xl"
                         src={photoURL}
                     />
                 </a>

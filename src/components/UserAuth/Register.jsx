@@ -51,10 +51,10 @@ const Register = () => {
 
     return (
 
-        <div className="hero bg-base-200 min-h-screen">
-            <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="bg-base-200 min-h-screen p-4">
+            <div className="flex flex-col justify-center items-center">
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-                    <form onSubmit={handleRegisterWithEmailAndPass} className="card-body">
+                    <form onSubmit={handleRegisterWithEmailAndPass} className="card-body pb-0">
                         <h1 className="text-4xl font-bold">Register now!</h1>
                         <div className="form-control">
                             <label className="label">
@@ -89,7 +89,7 @@ const Register = () => {
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
-                        <div className="form-control my-2">
+                        <div className="form-control mt-2">
                             <button className="btn btn-primary">Register</button>
                         </div>
                         <div className="text-center text-red-500">{passValidation}</div>

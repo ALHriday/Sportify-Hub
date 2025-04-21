@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../components/UserAuth/firebase.init";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
@@ -78,7 +79,7 @@ const AuthProvider = ({ children }) => {
         }).then(res => res.json()).then(result => {
 
             if (!result.insertedId) {
-                return  alert('Product Already Exist.');
+                return alert('Product Already Exist.');
             }
 
             if (result.insertedId) {
@@ -94,13 +95,23 @@ const AuthProvider = ({ children }) => {
             }
         });
     }
-    
 
 
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            setLoading(false);
+            const user = currentUser?.email;
+            if (user) {
+                axios.post('https://sportify-hub-server.vercel.app/jwt', {user}, { withCredentials: true }).then(() => {
+                    setLoading(false);
+                })
+
+            } else {
+                axios.post('https://sportify-hub-server.vercel.app/logOut', {}, { withCredentials: true }).then(() => {
+                    handleLogOut();
+                    setLoading(false);
+                })
+            }
         });
 
         return () => unSubscribe();

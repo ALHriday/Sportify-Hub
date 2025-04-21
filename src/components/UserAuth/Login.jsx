@@ -54,10 +54,9 @@ const Login = () => {
             }).catch(() => setPassValidation('Invalid! Please try again.'))
     }
 
-
     return (
-        <div className="hero bg-base-200 min-h-screen">
-            <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="bg-base-200 min-h-screen">
+            <div className="flex flex-col justify-center items-center p-4">
                 <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                     <form onSubmit={handleLogIn} className="card-body">
                         <h1 className="text-4xl font-bold">LogIn now!</h1>
@@ -84,18 +83,20 @@ const Login = () => {
                         <div className="form-control mt-3">
                             <button className="btn btn-primary">LogIn</button>
                         </div>
-                        <div className="text-center text-red-500">{passValidation}</div>
+                        <div className=" text-red-500">{passValidation}</div>
+                        <div className=" p-2">
+                            <p>{`Don't have an account`}<Link to='/Register' className="text-blue-500 underline pl-1">Register</Link></p>
+                        </div>
                     </form>
 
-                    <div className="text-center">
-                        <button onClick={handleSignInWithGoogle} className="btn btn-sm btn-link">
+                    <div className="card-body py-0 mb-4">
+                        <div className="flex justify-center items-center btn btn-primary">
                             <div className="w-8 h-8">
                                 <img className="w-full h-full p-1" src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000" alt="" />
                             </div>
-                            SignInWithGoogle</button>
-                        <div className="text-center p-2 mb-2">
-                            <p>{`Don't have an account`}<Link to='/Register' className="text-blue-500 underline pl-1">Register</Link></p>
+                            <button onClick={handleSignInWithGoogle} >SignInWithGoogle</button>
                         </div>
+
                     </div>
 
                 </div>
