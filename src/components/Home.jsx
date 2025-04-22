@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
 import Banner from "./Banner";
 import Products from "./Products";
-import { FaCartArrowDown } from "react-icons/fa";
 import FAQ from "./FAQ";
 
 const Home = () => {
@@ -16,13 +14,8 @@ const Home = () => {
             </div>
             <Products></Products>
 
-            <div className="py-6 flex justify-center items-center gap-2">
-                <Link className="btn" to='/Equipments'>Go to All Equipments</Link>
-                <Link className="btn" to='/cart'> <FaCartArrowDown /> </Link>
-            </div>
-
             <div className="grid grid-cols-3 gap-3 p-4 my-12">
-                <h1 className="text-2xl text-center col-span-3 text-slate-400 py-2">Your One-Stop Shop for Sports Excellence.</h1>
+                <h1 className="text-2xl md:text-4xl font-bold text-center col-span-3 text-slate-400 py-4">Your One-Stop Shop for Sports Excellence.</h1>
                 <div className="row-span-2">
                     <img className="w-full h-[268px] md:h-[428px] rounded-xl object-cover" src="https://images.unsplash.com/photo-1652497213813-89e58c19f678?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
                 </div>

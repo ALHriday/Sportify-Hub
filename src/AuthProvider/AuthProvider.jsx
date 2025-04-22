@@ -14,7 +14,7 @@ const AuthProvider = ({ children }) => {
     const [passValidation, setPassValidation] = useState([]);
     const [isTrue, setIsTrue] = useState(true);
     const [cardData, setCardData] = useState([]);
-    const [equipmentdata, setEquipmentdata] = useState([]);
+    const [equipmentData, setEquipmentData] = useState([]);
     const [cartItem, setCartItem] = useState([]);
 
 
@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
             .then(res => res.json())
             .then(data => {
                 setLoading(false);
-                setEquipmentdata(data);
+                setEquipmentData(data);
                 const productData = [...data].slice(0, 6);
                 setCardData(productData);
             })
@@ -54,20 +54,15 @@ const AuthProvider = ({ children }) => {
     }
 
     const showPass = (input) => {
-
         if (input.current.type === 'password') {
-            // setIsTrue(false);
             input.current.type = 'text';
         } else {
-            // setIsTrue(true);
             input.current.type = 'password';
         }
     }
 
     const HandleAddToCart = (product) => {
-
         const userEmail = user.email;
-
         const { pName, price, category, photoURL } = product;
 
         const productData = { pName, price, category, photoURL, userEmail }
@@ -100,15 +95,13 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             setUser(currentUser);
-            const user = currentUser?.email;
-            if (user) {
-                axios.post('https://sportify-hub-server.vercel.app/jwt', {user}, { withCredentials: true }).then(() => {
+            const userInfo = currentUser?.email;
+            if (userInfo) {
+                axios.post('https://sportify-hub-server.vercel.app/jwt', {userInfo}, { withCredentials: true }).then(() => {
                     setLoading(false);
                 })
-
             } else {
                 axios.post('https://sportify-hub-server.vercel.app/logOut', {}, { withCredentials: true }).then(() => {
-                    handleLogOut();
                     setLoading(false);
                 })
             }
@@ -133,8 +126,8 @@ const AuthProvider = ({ children }) => {
         setIsTrue,
         updateUser,
         cardData,
-        equipmentdata,
-        setEquipmentdata,
+        equipmentData,
+        setEquipmentData,
         setCartItem,
         cartItem,
         HandleAddToCart,

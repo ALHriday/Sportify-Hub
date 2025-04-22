@@ -1,48 +1,36 @@
-
 import { Tooltip } from "react-tooltip";
-import { Link } from "react-router-dom";
-// import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-import { FaEye } from "react-icons/fa";
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Equipment = ({ product }) => {
     const { HandleAddToCart } = useContext(AuthContext);
+    const navigate = useNavigate();
 
-    const { _id, photoURL, pName, rating, price, category } = product;
+    const { _id, photoURL, pName, rating, price } = product;
 
     return (
-        <div className="card bg-base-100 shadow-xl relative">
-
-            <div className="h-[280px] md:h-[300px] lg:h-[280px] p-4 rounded-xl">
-                <a data-tooltip-id="my-tooltip" data-tooltip-content={`${pName}`}>
-                    <Tooltip id="my-tooltip" />
-                    <img className="w-full h-full object-cover rounded-xl"
-                        src={photoURL}
-                    />
-                </a>
-            </div>
-
-            <div className="p-4 flex flex-col gap-1">
-                <div className="flex justify-center items-center gap-1">
+        <div className="flex flex-col justify-between gap-4 shadow-xl p-2 rounded-lg">
+            <div onClick={() => navigate(`/Equipments/${_id}`)} className="flex flex-col">
+                <div className="min-h-[120px] h-[160px] sm:min-h-[140px] max-h-[280px] rounded-md">
+                    <a data-tooltip-id="my-tooltip" data-tooltip-content={`${pName}`}>
+                        <Tooltip id="my-tooltip" />
+                        <img className="w-full h-full object-cover rounded-md"
+                            src={photoURL}
+                        />
+                    </a>
+                </div>
+                <div className="flex justify-between gap-2 px-2 mt-1">
                     <div className="flex flex-wrap gap-1">
-                        <p className="text-2xl">{pName}</p>
-                         <p className="badge badge-secondary">{rating}</p>
+                        <p className="text-md">{pName.length > 15 ? pName.slice(0, 15).concat('...') : pName}</p>
+                        <p className="badge badge-sm badge-secondary">{rating}</p>
                     </div>
-                </div>
-                
-                <div className="flex flex-col justify-center items-center gap-1">
-                    <p className="text-md text-bold">{category}</p>
-                    <p className="text-xl font-bold">${price}</p>
+                    <p className="text-md font-bold">${price}</p>
                 </div>
             </div>
-
-            <div className="w-full flex justify-center items-center gap-2 px-2 pb-4">
-                <button onClick={() => HandleAddToCart(product)} className="btn bg-teal-500 hover:bg-teal-700 text-black">Add to Cart</button>
-                <button className="btn bg-teal-500 hover:bg-teal-700 text-black">Purchase</button>
-
-                <Link to={`/Equipments/${_id}`} className="badge badge-neutral py-2 ml-2 btn"> <FaEye/> </Link>
+            <div className="w-full">
+                <button onClick={() => HandleAddToCart(product)} className="btn btn-accent text-black w-full">Add to Cart</button>
             </div>
         </div>
     );

@@ -5,25 +5,20 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import Swal from "sweetalert2";
-import axios from "axios";
+import useAxiosSecure from "./Hooks/useAxiosSecure";
 
 const MyEquipment = () => {
     const { user, setLoading } = useContext(AuthContext);
     const [data, setData] = useState([]);
+    const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
-        // fetch(`https://sportify-hub-server.vercel.app/myEquipment/${user?.email}`)
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         setData(data);
-        //         setLoading(false);
-        //     })
-        axios.get(`https://sportify-hub-server.vercel.app/myEquipment?email=${user.email}`, { withCredentials: true })
+        axiosSecure.get(`/myEquipment?email=${user?.email}`)
             .then(res => {
                 setData(res.data);
                 setLoading(false);
-            })
-    }, [setLoading, user]);
+        })
+    }, [axiosSecure, setLoading, user]);
 
 
     const sortData = () => {
@@ -60,7 +55,6 @@ const MyEquipment = () => {
             }
         });
     }
-
 
 
     return (
@@ -111,14 +105,11 @@ const MyEquipment = () => {
                             <td>All Products</td>
                         </tr>
                     </tfoot>
-
-
                 </table>
-
             </div>
+
             <div className="flex justify-center items-center p-4">
                 {user ? <Link className="btn" to='/AddEquipment'>Add Equipment</Link> : ''}
-
             </div>
         </div>
     );

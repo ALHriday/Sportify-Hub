@@ -1,55 +1,49 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { Tooltip } from 'react-tooltip'
-import { FaEye } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { FaDirections } from "react-icons/fa";
 
 const Products = () => {
-
     const { cardData, HandleAddToCart } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     return (
         <div className="p-4">
-            <div>
-            <h1 className="text-center py-6 px-4 text-4xl md:text-5xl font-bold">Sports Excellence Starts Here</h1>
+            <div className="flex justify-center items-center gap-1">
+                <h1 className="text-center py-6 px-4 text-3xl sm:text-5xl font-bold">Sports Excellence Starts Here </h1>
+                <div onClick={() => navigate('/Equipments')} >
+                    <a data-tooltip-id="my-tooltip" data-tooltip-content='Go To All Equipments'>
+                        <Tooltip id="my-tooltip" />
+                        <FaDirections className="text-4xl font-bold cursor-pointer"></FaDirections>
+                    </a>
+                </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3">
                 {cardData.map(product =>
-                    <div key={product._id} className="card bg-base-100 shadow-xl relative">
-                        <div className="h-[280px] md:h-[300px] lg:h-[280px] p-4 rounded-xl">
-                            <a data-tooltip-id="my-tooltip" data-tooltip-content={`${product.pName}`}>
-                                <Tooltip id="my-tooltip" />
-                                <img className="w-full h-full rounded-xl object-cover"
-                                    src={product.photoURL}
-                                />
-                            </a>
-                        </div>
-
-                        <div className="p-4 flex flex-col gap-1">
-                            <div className="flex justify-center items-center gap-1">
+                    <div key={product._id} className="flex flex-col justify-between gap-4 shadow-xl p-2 rounded-lg">
+                        <div onClick={() => navigate(`/Equipments/${product._id}`)} className="flex flex-col">
+                            <div className="min-w-[120px] min-h-[80px] h-[140px] sm:min-h-[140px] md:h-[150px] max-h-[280px] rounded-md">
+                                <a data-tooltip-id="my-tooltip" data-tooltip-content={`${product.pName}`}>
+                                    <Tooltip id="my-tooltip" />
+                                    <img className="w-full h-full object-cover rounded-md"
+                                        src={product.photoURL}
+                                    />
+                                </a>
+                            </div>
+                            <div className="flex justify-between gap-1 px-2 mt-1">
                                 <div className="flex flex-wrap gap-1">
-                                    <p className="text-2xl">{product.pName}</p>
-                                    <p className="badge badge-secondary">{product.rating}</p>
+                                    <p className="text-md">{product.pName.length > 12 ? product.pName.slice(0, 12).concat('...') : product.pName}</p>
+                                    <p className="badge badge-sm badge-secondary">{product.rating}</p>
                                 </div>
+                                <p className="text-md font-bold">${product.price}</p>
                             </div>
-
-
-                            <div className="flex flex-col justify-center items-center gap-1">
-                                <p className="text-md text-bold">{product.category}</p>
-                                <p className="text-xl font-bold">${product.price}</p>
-                            </div>
-
                         </div>
-
-                        <div className="w-full flex justify-center items-center gap-2 px-2 pb-4">
-                            <button onClick={() => HandleAddToCart(product)} className="btn bg-teal-500 hover:bg-teal-700 text-black">Add to Cart</button>
-                            <button className="btn bg-teal-500 hover:bg-teal-700 text-black">Purchase</button>
-
-                            <Link to={`/Equipments/${product._id}`} className="badge badge-neutral py-2 ml-2 btn"> <FaEye /> </Link>
+                        <div className="w-full">
+                            <button onClick={() => HandleAddToCart(product)} className="btn btn-accent text-black w-full">Add to Cart</button>
                         </div>
                     </div>
                 )}
-
             </div>
         </div>
 
