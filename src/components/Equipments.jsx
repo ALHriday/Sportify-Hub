@@ -2,7 +2,6 @@ import { useContext } from "react";
 import Equipment from "./Equipment";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
-
 const Equipments = () => {
     const { equipmentData } = useContext(AuthContext);
 

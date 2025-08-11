@@ -6,7 +6,7 @@ import { FaRegCopyright } from "react-icons/fa";
 
 const Footer = () => {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-5 py-4 mt-6 border-t-2 p-4 gap-4 md:gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-5 py-4 mt-6 p-4 gap-4 md:gap-2">
             <div className="col-span-1 md:col-span-2">
                 <h1 className="text-xl font-bold mb-1">Sportify Hub</h1>
                 <p className="text-slate-400">Your One-Stop Shop for Sports Excellence.</p>

@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import { auth } from "../components/UserAuth/firebase.init";
 import Swal from "sweetalert2";
 import axios from "axios";
+import useAxiosPublic from "../components/Hooks/useAxiosPublic";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext(null);
@@ -17,17 +18,19 @@ const AuthProvider = ({ children }) => {
     const [equipmentData, setEquipmentData] = useState([]);
     const [cartItem, setCartItem] = useState([]);
 
+    const axiosPublic = useAxiosPublic();
+
 
     useEffect(() => {
-        fetch('https://sportify-hub-server.vercel.app/products')
-            .then(res => res.json())
-            .then(data => {
+        axiosPublic.get('/products')
+            .then(res => {
+                const data = res.data;
                 setLoading(false);
                 setEquipmentData(data);
                 const productData = [...data].slice(0, 6);
                 setCardData(productData);
             })
-    }, [])
+    }, [axiosPublic])
 
 
     const createGoogleAccount = () => {
@@ -67,17 +70,9 @@ const AuthProvider = ({ children }) => {
 
         const productData = { pName, price, category, photoURL, userEmail }
 
-        fetch('https://sportify-hub-server.vercel.app/cartItem', {
-            method: 'POST',
-            headers: { 'content-type': 'application/json' },
-            body: JSON.stringify(productData)
-        }).then(res => res.json()).then(result => {
+        axiosPublic.post('/cartItem', productData).then(res => {
 
-            if (!result.insertedId) {
-                return alert('Product Already Exist.');
-            }
-
-            if (result.insertedId) {
+            if (res.data.insertedId) {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -85,7 +80,7 @@ const AuthProvider = ({ children }) => {
                     showConfirmButton: false,
                     timer: 2000
                 });
-
+                setLoading(false);
                 setCartItem([...cartItem, productData]);
             }
         });

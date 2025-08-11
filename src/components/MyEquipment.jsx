@@ -13,11 +13,11 @@ const MyEquipment = () => {
     const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
-        axiosSecure.get(`/myEquipment?email=${user?.email}`)
+        axiosSecure.get(`/myEquipment?email=${user.email}`)
             .then(res => {
                 setData(res.data);
                 setLoading(false);
-        })
+            })
     }, [axiosSecure, setLoading, user]);
 
 

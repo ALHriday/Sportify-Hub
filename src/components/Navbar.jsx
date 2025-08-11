@@ -57,7 +57,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end gap-3">
                 <div className="hidden md:flex">
-                    <Link className="btn" to='/carts'> <FaCartArrowDown /> </Link>
+                    <Link className="text-2xl" to='/carts'> <FaCartArrowDown /> </Link>
                 </div>
                 <label className="swap swap-rotate mt-1">
                     {/* this hidden checkbox controls the state */}

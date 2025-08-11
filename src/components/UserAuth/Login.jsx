@@ -4,6 +4,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from 'sweetalert2'
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import axios from "axios";
 
 const Login = () => {
 
@@ -47,6 +48,12 @@ const Login = () => {
                         showConfirmButton: false,
                         timer: 1500
                     });
+
+                    const userInfo = {email: result?.user?.email};
+
+                    axios.post('https://sportify-hub-server.vercel.app/logIn', { userInfo }).then(res => res.data
+                    )
+
                     setUser(result.user);
                     navigate('/');
                 }

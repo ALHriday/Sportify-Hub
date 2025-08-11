@@ -11,7 +11,7 @@ const Equipment = ({ product }) => {
     const { _id, photoURL, pName, rating, price } = product;
 
     return (
-        <div className="flex flex-col justify-between gap-4 shadow-xl p-2 rounded-lg">
+        <div className="flex flex-col justify-between gap-4 shadow-md p-2 rounded-lg">
             <div onClick={() => navigate(`/Equipments/${_id}`)} className="flex flex-col">
                 <div className="min-h-[120px] h-[160px] sm:min-h-[140px] max-h-[280px] rounded-md">
                     <a data-tooltip-id="my-tooltip" data-tooltip-content={`${pName}`}>
@@ -30,7 +30,7 @@ const Equipment = ({ product }) => {
                 </div>
             </div>
             <div className="w-full">
-                <button onClick={() => HandleAddToCart(product)} className="btn btn-accent text-black w-full">Add to Cart</button>
+                <button onClick={() => HandleAddToCart(product)} className="btn btn-sm btn-accent text-black w-full">Add to Cart</button>
             </div>
         </div>
     );
